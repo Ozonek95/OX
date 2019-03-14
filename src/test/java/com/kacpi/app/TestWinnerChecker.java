@@ -21,6 +21,14 @@ public class TestWinnerChecker {
             {3,3,3, Arrays.asList(new MoveCoordinates(2,2,Figure.CIRCLE),new MoveCoordinates(2,0,Figure.CIRCLE),new MoveCoordinates(0,1,Figure.CIRCLE)),false},
             {3,3,3, Arrays.asList(new MoveCoordinates(0,0,Figure.CIRCLE),new MoveCoordinates(1,0,Figure.CIRCLE),new MoveCoordinates(2,0,Figure.CIRCLE)),true},
             {3,3,3, Arrays.asList(new MoveCoordinates(2,2,Figure.CIRCLE),new MoveCoordinates(2,0,Figure.CIRCLE),new MoveCoordinates(2,1,Figure.CROSS)),false},
+            {5,5,3, Arrays.asList(new MoveCoordinates(0,3,Figure.CIRCLE),new MoveCoordinates(1,3,Figure.CIRCLE),new MoveCoordinates(2,3,Figure.CIRCLE)),true},
+            {5,5,4, Arrays.asList(new MoveCoordinates(0,3,Figure.CIRCLE),new MoveCoordinates(1,3,Figure.CIRCLE),new MoveCoordinates(2,3,Figure.CIRCLE)),false},
+            {5,5,4, Arrays.asList(new MoveCoordinates(0,3,Figure.CIRCLE),new MoveCoordinates(1,3,Figure.CIRCLE)
+                    ,new MoveCoordinates(2,3,Figure.CIRCLE),new MoveCoordinates(3,3,Figure.CIRCLE)),true},
+            {5,5,4, Arrays.asList(new MoveCoordinates(0,3,Figure.CROSS),new MoveCoordinates(1,3,Figure.CROSS)
+                        ,new MoveCoordinates(2,3,Figure.CROSS),new MoveCoordinates(3,3,Figure.CROSS)),true},
+            {5,5,4, Arrays.asList(new MoveCoordinates(0,3,Figure.CROSS),new MoveCoordinates(1,3,Figure.CIRCLE)
+                        ,new MoveCoordinates(2,3,Figure.CROSS),new MoveCoordinates(3,3,Figure.CROSS)),false},
         };
     }
 
