@@ -15,4 +15,5 @@ class Player {
     Figure getFigure() {
         return figure;
     }
+
 }

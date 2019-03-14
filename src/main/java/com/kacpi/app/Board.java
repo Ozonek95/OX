@@ -8,10 +8,18 @@ class Board {
     private int numberOfFields;
     private int rows;
     private int columns;
+    private int patternToWinLength;
     Board(int rows, int columns) {
         initializeBoard(rows, columns);
         this.rows=rows;
         this.columns=columns;
+    }
+
+    Board(Settings settings) {
+        initializeBoard(settings.getRows(),settings.getColumns());
+        this.rows=settings.getRows();
+        this.columns=settings.getColumns();
+        this.patternToWinLength = settings.getPatternToWinLength();
     }
 
     private void initializeBoard(int rows, int columns) {
@@ -28,12 +36,16 @@ class Board {
         return numberOfFields;
     }
 
-    public int getRows() {
+    int getRows() {
         return rows;
     }
 
-    public int getColumns() {
+    int getColumns() {
         return columns;
+    }
+
+    int getPatternToWinLength(){
+        return patternToWinLength;
     }
 
     //ZAKŁADAM, ŻE BĘDĘ ZACZYNAŁ INDEKSY OD 1
