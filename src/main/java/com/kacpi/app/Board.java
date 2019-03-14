@@ -40,4 +40,10 @@ class Board {
     Field getField(int rows, int columns) {
         return fields[rows][columns];
     }
+
+    void setField(int row, int column, Figure figure) {
+        Field field = new Field();
+        field.setState(figure);
+        fields[row][column] = field;
+    }
 }

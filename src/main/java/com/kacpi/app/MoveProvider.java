@@ -20,7 +20,7 @@ class MoveProvider {
             } catch (NumberFormatException e){
                 //TO DO PROVIDE MESSAGE
             }
-        return new MoveCoordinates(row,column);
+        return new MoveCoordinates(row,column, Figure.CIRCLE);
     }
 }
 

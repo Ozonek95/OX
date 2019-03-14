@@ -13,4 +13,8 @@ class Field {
     Figure getState() {
         return state;
     }
+
+    void setState(Figure figure) {
+        this.state=figure;
+    }
 }
