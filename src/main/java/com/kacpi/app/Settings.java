@@ -1,5 +1,9 @@
 package com.kacpi.app;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Kacper Staszek
  */
@@ -7,6 +11,7 @@ class Settings {
     private final int rows;
     private final int columns;
     private final int patternToWinLength;
+    private List<Player> players = Arrays.asList(new Player("Player1",Figure.CIRCLE),new Player("Player2",Figure.CROSS));
 
     Settings(int rows, int columns, int patternToWinLength) {
         this.rows = rows;
@@ -14,15 +19,19 @@ class Settings {
         this.patternToWinLength = patternToWinLength;
     }
 
-    public int getRows() {
+    int getRows() {
         return rows;
     }
 
-    public int getColumns() {
+    int getColumns() {
         return columns;
     }
 
-    public int getPatternToWinLength() {
+    int getPatternToWinLength() {
         return patternToWinLength;
+    }
+
+    String getPlayerName(int index){
+        return players.get(index).getName();
     }
 }

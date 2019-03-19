@@ -6,8 +6,9 @@ package com.kacpi.app;
 class Player {
     private String name;
     private Figure figure;
+    private int score;
 
-    public Player(String name, Figure figure) {
+    Player(String name, Figure figure) {
         this.name = name;
         this.figure = figure;
     }
@@ -16,4 +17,15 @@ class Player {
         return figure;
     }
 
+    String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
