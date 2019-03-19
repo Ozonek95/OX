@@ -4,13 +4,8 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class MoveProvider {
-    private String move;
 
-    MoveProvider(String move){
-        this.move=move;
-    }
-
-    MoveCoordinates provideCoordinates(){
+    MoveCoordinates provideCoordinates(String move){
         Integer row = 0;
         Integer column = 0;
         String[] inputs = move.split(",");

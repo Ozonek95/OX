@@ -35,8 +35,8 @@ public class TestMoveProvider {
 
     @Test(dataProvider = "data")
     public void testMoveProvider(String input, int row, int column){
-        MoveProvider moveProvider = new MoveProvider(input);
-        MoveCoordinates coordinates = moveProvider.provideCoordinates();
+        MoveProvider moveProvider = new MoveProvider();
+        MoveCoordinates coordinates = moveProvider.provideCoordinates(input);
         int rowFromCoordinate = coordinates.getRow();
         int columnFromCoordinate = coordinates.getColumn();
         Assert.assertEquals(rowFromCoordinate,row);

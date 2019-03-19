@@ -27,8 +27,8 @@ public class TestBoardUpdater {
         ,Figure figure,Figure expected){
         Board board = new Board(rows,columns);
         MoveCoordinates moveCoordinates = new MoveCoordinates(rowCoor,columnCoor,figure);
-        MoveValidator moveValidator = new MoveValidator();
-        boolean result = moveValidator.validateMove(moveCoordinates,board);
+        MoveValidator moveValidator = new MoveValidator(board);
+        boolean result = moveValidator.validateMove(moveCoordinates);
         BoardUpdater boardUpdater = new BoardUpdater(board);
         if(result) {
             boardUpdater.updateBoard(moveCoordinates);

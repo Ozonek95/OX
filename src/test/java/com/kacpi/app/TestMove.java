@@ -23,13 +23,28 @@ public class TestMove {
         };
     }
     @Test(dataProvider = "data")
-    public void testIfMoveIsValidBasedOnCoordinatesAndFigure(int rows, int columns,
+    public void testIfMoveIsValidBasedOnCoordinates(int rows, int columns,
                             MoveCoordinates moveCoordinates,boolean expectedResult)
     {
         Board board = new Board(rows,columns);
-        MoveCoordinates coordinates = moveCoordinates;
-        MoveValidator moveValidator = new MoveValidator();
-        boolean validMove = moveValidator.validateMove(coordinates, board);
+        MoveValidator moveValidator = new MoveValidator(board);
+        boolean validMove = moveValidator.validateMove(moveCoordinates);
         Assert.assertEquals(validMove,expectedResult);
+    }
+
+    @Test
+    public void testIfMoveIsValidBasedOnCoordinatesAndFigure(){
+        Board board = new Board(new Settings(3,3,3));
+        MoveValidator moveValidator = new MoveValidator(board);
+        boolean validMove1 = moveValidator.validateMove(new MoveCoordinates(0,0,Figure.CIRCLE));
+        board.setField(0,0,Figure.CIRCLE);
+        boolean validMove2 = moveValidator.validateMove(new MoveCoordinates(0,0,Figure.CIRCLE));
+        boolean validMove3 = moveValidator.validateMove(new MoveCoordinates(0,0,Figure.CROSS));
+        boolean validMove4 = moveValidator.validateMove(new MoveCoordinates(0,1,Figure.CROSS));
+        Assert.assertTrue(validMove1);
+        Assert.assertFalse(validMove2);
+        Assert.assertFalse(validMove3);
+        Assert.assertTrue(validMove4);
+
     }
 }
