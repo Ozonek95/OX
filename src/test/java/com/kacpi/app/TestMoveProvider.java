@@ -10,12 +10,6 @@ import org.testng.annotations.Test;
 @Test
 public class TestMoveProvider {
 
-//    public void testInputFromUser(){
-//
-//        InputProvider inputProvider = new InputKeyboardProvider();
-//        String input = inputProvider.getMove();
-//    }
-
     @DataProvider
     public static Object[][] data () {
         return new Object[][] {
@@ -43,4 +37,10 @@ public class TestMoveProvider {
         Assert.assertEquals(columnFromCoordinate,column);
     }
 
+    @Test
+    void testCurrentPlayerSetting(){
+        MoveProvider moveProvider = new MoveProvider();
+        moveProvider.setCurrentPlayer(new Player("Player1",Figure.CIRCLE));
+        Assert.assertNotNull(moveProvider.getPlayer());
+    }
 }

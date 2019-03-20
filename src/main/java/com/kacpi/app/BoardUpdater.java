@@ -1,5 +1,4 @@
 package com.kacpi.app;
-
 /**
  * @author Kacper Staszek
  */

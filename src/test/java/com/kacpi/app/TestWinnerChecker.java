@@ -27,7 +27,7 @@ public class TestWinnerChecker {
     }
 
     @DataProvider
-    public static Object[][] data() {
+    public static Object[][] data() throws IllegalGameSettings {
         return new Object[][]{
                 {new Settings(3, 3, 3), Arrays.asList(
                         new MoveCoordinates(2, 0, Figure.CIRCLE),

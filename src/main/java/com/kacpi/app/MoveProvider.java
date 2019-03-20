@@ -5,13 +5,26 @@ package com.kacpi.app;
  */
 class MoveProvider {
 
+    private Player currentPlayer;
+
     MoveCoordinates provideCoordinates(String move){
         Integer row = 0;
         Integer column = 0;
         String[] inputs = move.split(",");
             row = Integer.parseInt(String.valueOf(inputs[0]));
             column = Integer.parseInt(String.valueOf(inputs[1]));
-        return new MoveCoordinates(row,column, Figure.CIRCLE);
+            if(currentPlayer==null){
+                currentPlayer = new Player("Player1", Figure.CIRCLE);
+            }
+        return new MoveCoordinates(row,column, currentPlayer.getFigure());
+    }
+
+    void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    Player getPlayer(){
+        return currentPlayer;
     }
 }
 

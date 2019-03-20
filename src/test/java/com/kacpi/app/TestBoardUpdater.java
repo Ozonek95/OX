@@ -24,7 +24,7 @@ public class TestBoardUpdater {
 
     @Test(dataProvider = "data")
     public void testIfBoardChangeAfterValidMove(int rows,int columns, int rowCoor, int columnCoor
-        ,Figure figure,Figure expected){
+        ,Figure figure,Figure expected) throws InvalidMoveException {
         Board board = new Board(rows,columns);
         MoveCoordinates moveCoordinates = new MoveCoordinates(rowCoor,columnCoor,figure);
         MoveValidator moveValidator = new MoveValidator(board);

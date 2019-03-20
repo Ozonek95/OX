@@ -96,6 +96,8 @@ class BoardPrinter {
             }
         }
 
+        System.out.println();
+        System.out.println();
         changePrinterToConsole();
     }
 }
