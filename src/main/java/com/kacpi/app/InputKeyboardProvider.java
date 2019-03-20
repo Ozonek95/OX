@@ -9,7 +9,7 @@ public class InputKeyboardProvider implements InputProvider {
     private Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String getMove() {
+    public String getInput() {
         return scanner.nextLine();
     }
 }

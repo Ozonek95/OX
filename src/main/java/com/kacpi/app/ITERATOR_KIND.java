@@ -3,6 +3,6 @@ package com.kacpi.app;
 /**
  * @author Kacper Staszek
  */
-interface InputProvider {
-    String getInput();
+enum ITERATOR_KIND {
+    HOR, VER, DIAG, ANTI_DIAG
 }

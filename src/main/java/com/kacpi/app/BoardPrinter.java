@@ -3,7 +3,6 @@ package com.kacpi.app;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 
 /**
  * @author Kacper Staszek
@@ -23,15 +22,6 @@ class BoardPrinter {
     void changePrinterToConsole(){
         System.setOut(console);
         currentPrinter = console;
-    }
-
-    void changePrinterToFile(String fileName){
-        try {
-            PrintStream writer = new PrintStream(new File(fileName));
-            currentPrinter = writer;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     void printBoard() {
@@ -101,3 +91,11 @@ class BoardPrinter {
         changePrinterToConsole();
     }
 }
+//    void changePrinterToFile(String fileName){
+//        try {
+//            PrintStream writer = new PrintStream(new File(fileName));
+//            currentPrinter = writer;
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }

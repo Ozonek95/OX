@@ -58,4 +58,8 @@ class Board {
         field.setState(figure);
         fields[row][column] = field;
     }
+
+    void clear() {
+        initializeBoard(rows,columns);
+    }
 }

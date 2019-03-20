@@ -36,11 +36,4 @@ public class TestMoveProvider {
         Assert.assertEquals(rowFromCoordinate,row);
         Assert.assertEquals(columnFromCoordinate,column);
     }
-
-    @Test
-    void testCurrentPlayerSetting(){
-        MoveProvider moveProvider = new MoveProvider();
-        moveProvider.setCurrentPlayer(new Player("Player1",Figure.CIRCLE));
-        Assert.assertNotNull(moveProvider.getPlayer());
-    }
 }

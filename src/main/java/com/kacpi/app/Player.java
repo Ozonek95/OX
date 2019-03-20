@@ -21,7 +21,7 @@ class Player {
         return name;
     }
 
-    public int getScore() {
+    int getScore() {
         return score;
     }
 

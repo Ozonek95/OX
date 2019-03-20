@@ -4,15 +4,14 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class ValidateMoveProviderAPI {
-    private Settings settings;
     private InputProvider inputProvider;
     private MoveProvider moveProvider;
     private MoveValidator moveValidator;
+    private MessageProviderBasedOnLanguage messageProviderBasedOnLanguage;
 
-    ValidateMoveProviderAPI(InputProvider inputProvider, MoveValidator moveValidator, Settings settings) {
+    ValidateMoveProviderAPI(InputProvider inputProvider, MoveValidator moveValidator) {
         this.inputProvider = inputProvider;
         this.moveProvider = new MoveProvider();
-        this.settings = settings;
         this.moveValidator = moveValidator;
     }
 
@@ -21,19 +20,20 @@ class ValidateMoveProviderAPI {
         boolean validMove = false;
         MoveCoordinates moveCoordinates = null;
         while (!validMove){
-            String move = inputProvider.getMove();
+            String move = inputProvider.getInput();
             try {
                 moveCoordinates = moveProvider.provideCoordinates(move);
                 moveValidator.validateMove(moveCoordinates);
                 validMove=true;
-            } catch (NumberFormatException e){
-                System.err.print("Bad move coordinates");
-            } catch (InvalidMoveException e) {
-                System.err.print(e.getMessage());
+                moveProvider.changeFigure();
+            } catch (InvalidMoveException | IllegalArgumentException e){
+                System.err.println(messageProviderBasedOnLanguage.provideMessage("badMove"));
             }
         }
-        moveProvider.setCurrentPlayer(settings.getPlayers().get(1));
         return moveCoordinates;
     }
 
+    void setMessageProviderBasedOnLanguage(MessageProviderBasedOnLanguage messageProviderBasedOnLanguage) {
+        this.messageProviderBasedOnLanguage = messageProviderBasedOnLanguage;
+    }
 }

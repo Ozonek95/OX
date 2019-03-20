@@ -11,8 +11,8 @@ class MoveValidator {
     }
 
     boolean validateMove(MoveCoordinates move) throws InvalidMoveException {
-            int row = move.getRow();
-            int column = move.getColumn();
+            Integer row = move.getRow();
+            Integer column = move.getColumn();
             if(row>=board.getRows()||row<0||column>=board.getColumns()||column<0){
                 throw new InvalidMoveException("Your move is out of bounds!");
             }
