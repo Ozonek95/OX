@@ -47,7 +47,7 @@ public class GameTest {
     }
     public void testWinIn2Rounds(){
         InputProvider inputProvider = new InputKeyboardProvider(new Scanner(
-                "0,0\n0,1\n1,1\n0,2\n2,2\n0,1\n0,0\n0,2\n1,1\n2,2\n1,0\n2,1\n2,0\n"));
+                "0,0\n5121312,33\n0,1\nfawgsadmmm\n1,1\n0,2\n2,2\n0,1\ndwagawgwa\n0,0\n0,2\n1,1\n2,2\n1,0\n2,1\n2,0\n"));
         Settings settings = null;
         try {
             settings = new Settings(3,3,3);
