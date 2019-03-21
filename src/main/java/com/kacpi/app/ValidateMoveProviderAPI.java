@@ -13,7 +13,7 @@ class ValidateMoveProviderAPI {
      * @param inputProvider provide possibility to interact with user. He can provide his moves thanks to that.
      * @param moveValidator logic that looks, if provided move is valid.
      *
-     * Combines classes that are responsible for moves on game board.
+     * Combines classes that are responsible for moves on game board..
      */
     ValidateMoveProviderAPI(InputProvider inputProvider, MoveValidator moveValidator) {
         this.inputProvider = inputProvider;
