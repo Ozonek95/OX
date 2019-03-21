@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kacper Staszek
+ * provides all language determinated messages.
  */
 class MessageProviderBasedOnLanguage {
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("OX", new Locale("pl", "PL"));

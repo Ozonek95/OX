@@ -15,10 +15,17 @@ class Menu {
         }
     }
 
+    /**
+     * @param inputProvider to interact with user.
+     *                      Provides possibility to change options, and run new game.
+     */
     Menu(InputProvider inputProvider) {
         this.inputProvider = inputProvider;
     }
 
+    /**
+     * Switch to change options, or run new game.
+     */
     void startMenu(){
         chooseLanguage();
         boolean gameStarted = false;
@@ -49,6 +56,9 @@ class Menu {
         settings.getPlayers().get(1).setName(inputProvider.getInput());
     }
 
+    /**
+     * Asks about first player, starts game.
+     */
     private void playGame() {
         boolean playerChosen = false;
         while (!playerChosen) {
@@ -69,6 +79,9 @@ class Menu {
         game.playMatch();
     }
 
+    /**
+     * Can change game language.
+     */
     private void chooseLanguage() {
         boolean languageProvided = false;
         while (!languageProvided){
@@ -94,6 +107,9 @@ class Menu {
         }
     }
 
+    /**
+     * @return settings, that were changed by user.
+     */
     Settings createSettings() {
         boolean correctSettings = false;
         while (!correctSettings){
@@ -125,5 +141,9 @@ class Menu {
 
     void setMessageProvider(MessageProviderBasedOnLanguage messageProvider) {
         this.messageProvider = messageProvider;
+    }
+
+    Settings getSettings() {
+        return settings;
     }
 }

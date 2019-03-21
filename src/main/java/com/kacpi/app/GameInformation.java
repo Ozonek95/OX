@@ -10,6 +10,10 @@ class GameInformation {
     private int moves = 0;
     private int rounds = 0;
 
+    /**
+     * @param settings need to have info about players
+     *                 hold all need info about game current state.
+     */
     GameInformation(Settings settings) {
         this.settings = settings;
         this.currentPlayer = settings.getPlayers().get(0);
@@ -67,7 +71,6 @@ class GameInformation {
         settings.getPlayers().get(1).addScore(1);
         rounds++;
         moves=0;
-        System.out.println(" Draw! score is "+settings.getPlayers().get(0).getScore()+" vs "+settings.getPlayers().get(1).getScore());
     }
 
     void nextRound() {

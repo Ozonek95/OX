@@ -1,7 +1,5 @@
 package com.kacpi.app;
 
-import com.kacpi.app.Figure;
-
 /**
  * @author Kacper Staszek
  */

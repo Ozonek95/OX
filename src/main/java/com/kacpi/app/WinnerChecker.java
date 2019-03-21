@@ -11,6 +11,10 @@ class WinnerChecker {
         this.board = board;
     }
 
+    /**
+     * @param moveCoordinates last move, base on it class checks if move was winning.
+     * @return true if move won the round.
+     */
     boolean checkIfAnyoneWon(MoveCoordinates moveCoordinates) {
         if (checkIfAnyoneWonRows(moveCoordinates)) return true;
         if (checkIfAnyoneWonColumns(moveCoordinates)) return true;
@@ -18,6 +22,11 @@ class WinnerChecker {
         return checkIfAnyoneWonDiagonalsOtherSide(moveCoordinates);
     }
 
+
+    /**
+     * All of below methods check if move is winning move based on its coordinate, and game winning conditions. If any returns true, move was winning.
+     *
+     */
     private boolean checkIfAnyoneWonRows(MoveCoordinates moveCoordinates) {
         int fieldsToCheck = (board.getPatternToWinLength() * 2) - 1;
 
@@ -36,7 +45,7 @@ class WinnerChecker {
             }
         }
         int counter = 0;
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i <= endIndex; i++) {
             try {
                 if (board.getField(i, column).getState().equals(figureToCheck)) {
                     counter++;
@@ -70,7 +79,7 @@ class WinnerChecker {
             }
         }
         int counter = 0;
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i <= endIndex; i++) {
             try {
                 if (board.getField(row, i).getState().equals(figureToCheck)) {
                     counter++;

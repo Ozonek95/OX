@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.kacpi</groupId>
-    <artifactId>#APP</artifactId>
+    <artifactId>TicTacToe</artifactId>
     <version>0.1</version>
-    <name>#NAME</name>
-    <description>#DESC</description>
+    <name>OX</name>
+    <description>Training project</description>
     <url></url>
 
     <properties>
@@ -52,11 +52,18 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java/resource</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+
                 <version>${version.plugin.maven.enforcer}</version>
+
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -83,7 +90,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>#FQN of your MainClass</mainClass>
+                            <mainClass>com.kacpi.app.MainAuto</mainClass>
                         </manifest>
                         <manifestEntries>
                             <mode>development</mode>
@@ -94,6 +101,7 @@
                 </configuration>
             </plugin>
             <plugin>
+
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${version.plugin.maven.compiler}</version>
