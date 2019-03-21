@@ -6,5 +6,6 @@ Used technologies : TestNG, Mockito
 maven version 3.5.3
 ##Running
 open project main folder (OX), then do mvn clean install, next type java -jar target/TicTacToe-0.1.jar and input providing file name
-with inputs if You want to play automatic game, or with no arguments to play simple game.
+with inputs if You want to play automatic game, or with no arguments to play simple game. You can also use scripts: rungame.sh 
+or rungamewithautomat.sh, but in second case please, remember to provide valid input file.
 

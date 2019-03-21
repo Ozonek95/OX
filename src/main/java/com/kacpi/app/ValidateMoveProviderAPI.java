@@ -21,7 +21,6 @@ class ValidateMoveProviderAPI {
         this.moveValidator = moveValidator;
     }
 
-
     /**
      * @return after validating, provides move to the game.
      */
