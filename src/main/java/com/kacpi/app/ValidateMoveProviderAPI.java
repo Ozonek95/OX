@@ -16,18 +16,22 @@ class ValidateMoveProviderAPI {
     }
 
 
-    MoveCoordinates getValidMove(){
+    MoveCoordinates getValidMove() {
         boolean validMove = false;
         MoveCoordinates moveCoordinates = null;
-        while (!validMove){
+        while (!validMove) {
             String move = inputProvider.getInput();
-            try {
-                moveCoordinates = moveProvider.provideCoordinates(move);
-                moveValidator.validateMove(moveCoordinates);
-                validMove=true;
-                moveProvider.changeFigure();
-            } catch (InvalidMoveException | IllegalArgumentException e){
-                System.err.println(messageProviderBasedOnLanguage.provideMessage("badMove"));
+            if (move.equals(messageProviderBasedOnLanguage.provideMessage("quit"))) {
+                return null;
+            } else {
+                try {
+                    moveCoordinates = moveProvider.provideCoordinates(move);
+                    moveValidator.validateMove(moveCoordinates);
+                    validMove = true;
+                    moveProvider.changeFigure();
+                } catch (InvalidMoveException | IllegalArgumentException e) {
+                    System.err.println(messageProviderBasedOnLanguage.provideMessage("badMove"));
+                }
             }
         }
         return moveCoordinates;

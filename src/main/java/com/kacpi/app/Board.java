@@ -48,7 +48,6 @@ class Board {
         return patternToWinLength;
     }
 
-    //ZAKŁADAM, ŻE BĘDĘ ZACZYNAŁ INDEKSY OD 1
     Field getField(int rows, int columns) {
         return fields[rows][columns];
     }
@@ -60,6 +59,7 @@ class Board {
     }
 
     void clear() {
+        numberOfFields-=numberOfFields;
         initializeBoard(rows,columns);
     }
 }

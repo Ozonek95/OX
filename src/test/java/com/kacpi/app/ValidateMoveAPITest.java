@@ -27,17 +27,18 @@ public class ValidateMoveAPITest {
 
 
     @Test(dataProvider = "data")
-    public void testMoveValidation(int rows,int columns,int patternToWin,String input,int expecterRowCoordinate,int expectedColumnCoordinate) throws IllegalGameSettings {
+    public void testMoveValidation(int rows,int columns,int patternToWin,String input,int expectedRowCoordinate,int expectedColumnCoordinate) throws IllegalGameSettings {
         InputKeyboardProvider inputProvider = Mockito.mock(InputKeyboardProvider.class);
         Mockito.when(inputProvider.getInput()).thenReturn(input);
         Board board = new Board(new Settings(rows,columns,patternToWin));
         MoveValidator moveValidator = new MoveValidator(board);
         ValidateMoveProviderAPI validateMoveProviderAPI = new ValidateMoveProviderAPI(inputProvider,moveValidator);
+        validateMoveProviderAPI.setMessageProviderBasedOnLanguage(new MessageProviderBasedOnLanguage());
         MoveCoordinates validMove = validateMoveProviderAPI.getValidMove();
         int row = validMove.getRow();
         int column = validMove.getColumn();
 
-        Assert.assertEquals(row,expecterRowCoordinate);
+        Assert.assertEquals(row,expectedRowCoordinate);
         Assert.assertEquals(column,expectedColumnCoordinate);
     }
 }

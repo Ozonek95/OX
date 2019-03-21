@@ -13,10 +13,10 @@ public class TestMenu {
         InputKeyboardProvider inputProvider = Mockito.mock(InputKeyboardProvider.class);
         Mockito.when(inputProvider.getInput()).thenReturn("3");
         Menu menu = new Menu(inputProvider);
-        menu.setMessageProviderBasedOnLanguage(new MessageProviderBasedOnLanguage());
+        menu.setMessageProvider(new MessageProviderBasedOnLanguage());
         Settings settings = menu.createSettings();
-        Assert.assertEquals(settings.getColumns(),3);
-        Assert.assertEquals(settings.getRows(),3);
-        Assert.assertEquals(settings.getPatternToWinLength(),3);
+        Assert.assertEquals(settings.getColumns(), 3);
+        Assert.assertEquals(settings.getRows(), 3);
+        Assert.assertEquals(settings.getPatternToWinLength(), 3);
     }
 }

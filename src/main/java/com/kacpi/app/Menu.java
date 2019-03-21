@@ -5,9 +5,8 @@ package com.kacpi.app;
  */
 class Menu {
     private InputProvider inputProvider;
-    private MessageProviderBasedOnLanguage messageProviderBasedOnLanguage = new MessageProviderBasedOnLanguage();
+    private MessageProviderBasedOnLanguage messageProvider = new MessageProviderBasedOnLanguage();
     private Settings settings;
-
     {
         try {
             settings = new Settings(3,3,3);
@@ -24,21 +23,49 @@ class Menu {
         chooseLanguage();
         boolean gameStarted = false;
         while (!gameStarted){
-            System.out.println(messageProviderBasedOnLanguage.provideMessage("createSettings"));
-            System.out.println(messageProviderBasedOnLanguage.provideMessage("startGame"));
-            System.out.println(messageProviderBasedOnLanguage.provideMessage("changeLanguage"));
+            System.out.println(messageProvider.provideMessage("createSettings"));
+            System.out.println(messageProvider.provideMessage("startGame"));
+            System.out.println(messageProvider.provideMessage("changeLanguage"));
+            System.out.println(messageProvider.provideMessage("changePlayerNames"));
             int choice = Integer.parseInt(inputProvider.getInput());
             switch (choice){
                 case 1: settings=createSettings(); break;
                 case 2: playGame(); gameStarted = true; break;
-                case 3:chooseLanguage();
+                case 3:
+                    chooseLanguage();
+                    break;
+                case 4:
+                    changePlayersNames();
+                    break;
             }
         }
 
     }
 
+    private void changePlayersNames() {
+        System.out.println(messageProvider.provideMessage("name1"));
+        settings.getPlayers().get(0).setName(inputProvider.getInput());
+        System.out.println(messageProvider.provideMessage("name2"));
+        settings.getPlayers().get(1).setName(inputProvider.getInput());
+    }
+
     private void playGame() {
-        Game game = new Game(settings,messageProviderBasedOnLanguage);
+        boolean playerChosen = false;
+        while (!playerChosen) {
+            System.out.println(messageProvider.provideMessage("whoStarts"));
+            System.out.println("1:" + settings.getPlayers().get(0).getName());
+            System.out.println("2:" + settings.getPlayers().get(1).getName());
+            try {
+                int choice = Integer.parseInt(inputProvider.getInput());
+                if (choice == 2) {
+                    settings.changePlayers();
+                }
+                playerChosen = true;
+            } catch (NumberFormatException exception) {
+                messageProvider.provideMessage("invalidInput");
+            }
+        }
+        Game game = new Game(settings, messageProvider, inputProvider,new GameInformation(settings));
         game.playMatch();
     }
 
@@ -51,8 +78,14 @@ class Menu {
             try {
                 int input = Integer.parseInt(inputProvider.getInput());
                 switch (input){
-                    case 1: messageProviderBasedOnLanguage.changeLanguage(Language.EN); languageProvided=true; break;
-                    case 2: messageProviderBasedOnLanguage.changeLanguage(Language.PL); languageProvided=true; break;
+                    case 1:
+                        messageProvider.changeLanguage(Language.EN);
+                        languageProvided = true;
+                        break;
+                    case 2:
+                        messageProvider.changeLanguage(Language.PL);
+                        languageProvided = true;
+                        break;
                     default: throw new IllegalArgumentException();
                 }
             } catch (IllegalArgumentException e){
@@ -63,31 +96,34 @@ class Menu {
 
     Settings createSettings() {
         boolean correctSettings = false;
-        Settings settings = null;
         while (!correctSettings){
             try {
-                System.out.println(messageProviderBasedOnLanguage.provideMessage("numberOfRows"));
+                System.out.println(messageProvider.provideMessage("numberOfRows"));
                 int rows = Integer.parseInt(inputProvider.getInput());
-                System.out.println(messageProviderBasedOnLanguage.provideMessage("numberOfColumns"));
+                System.out.println(messageProvider.provideMessage("numberOfColumns"));
                 int columns = Integer.parseInt(inputProvider.getInput());
-                System.out.println(messageProviderBasedOnLanguage.provideMessage("patternToWinLength"));
+                System.out.println(messageProvider.provideMessage("patternToWinLength"));
                 int patternToWin = Integer.parseInt(inputProvider.getInput());
-                if(rows<1||columns<1||patternToWin<1){
-                    throw new IllegalGameSettings("Parameters must be positive numbers");
-                }
-                settings = new Settings(rows,columns,patternToWin);
+                checkGameCoordinatesAreValid(rows, columns, patternToWin);
+                settings.setRows(rows);
+                settings.setColumns(columns);
+                settings.setPatternToWinLength(patternToWin);
                 correctSettings=true;
-            } catch (NumberFormatException e){
-                System.err.println(messageProviderBasedOnLanguage.provideMessage("invalidInput"));
-            } catch (IllegalGameSettings e){
-                System.err.println(messageProviderBasedOnLanguage.provideMessage("invalidInput"));
+            } catch (NumberFormatException | IllegalGameSettings e) {
+                System.err.println(messageProvider.provideMessage("invalidInput"));
             }
         }
         return settings;
 
     }
 
-    void setMessageProviderBasedOnLanguage(MessageProviderBasedOnLanguage messageProviderBasedOnLanguage) {
-        this.messageProviderBasedOnLanguage = messageProviderBasedOnLanguage;
+    private void checkGameCoordinatesAreValid(int rows, int columns, int patternToWin) throws IllegalGameSettings {
+        if (rows < 1 || columns < 1 || patternToWin < 1) {
+            throw new IllegalGameSettings("Parameters must be positive numbers");
+        }
+    }
+
+    void setMessageProvider(MessageProviderBasedOnLanguage messageProvider) {
+        this.messageProvider = messageProvider;
     }
 }

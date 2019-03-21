@@ -4,81 +4,67 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class Game {
-    private Board board;
+    private BoardOperationsAPI boardOperationsAPI;
     private Settings settings;
-    private Player currentPlayer;
-    private BoardPrinter boardPrinter;
-    private BoardUpdater boardUpdater;
-    private WinnerChecker winnerChecker;
     private ValidateMoveProviderAPI validateMoveProviderAPI;
     private MessageProviderBasedOnLanguage messageProvider;
-    private Boolean haveWinner = false;
-    private int moves = 0;
-    private int rounds = 0;
+    private GameInformation gameInformation;
 
-    Game(Settings settings, MessageProviderBasedOnLanguage messageProviderBasedOnLanguage) {
+    Game(Settings settings, MessageProviderBasedOnLanguage messageProviderBasedOnLanguage, InputProvider inputProvider, GameInformation gameInformation) {
         this.settings = settings;
-        this.board = new Board(settings);
-        this.boardPrinter = new BoardPrinter(board);
-        this.boardUpdater = new BoardUpdater(board);
-        this.winnerChecker = new WinnerChecker(board);
-        changeCurrentPlayer(settings);
+        this.boardOperationsAPI = new BoardOperationsAPI(settings);
         this.messageProvider = new MessageProviderBasedOnLanguage();
-        this.validateMoveProviderAPI = new ValidateMoveProviderAPI(new InputKeyboardProvider(), new MoveValidator(board));
+        this.validateMoveProviderAPI = new ValidateMoveProviderAPI(inputProvider, new MoveValidator(boardOperationsAPI.getBoard()));
         messageProvider = messageProviderBasedOnLanguage;
         validateMoveProviderAPI.setMessageProviderBasedOnLanguage(messageProvider);
+        this.gameInformation=gameInformation;
     }
 
     void playMatch() {
-        while (!haveWinner || rounds < 3) {
+        while (!gameInformation.checkIfHaveWinner() && gameInformation.roundsPlayed() < 3) {
             playSmallMatch();
         }
-        System.out.println("Winner is "+getWinner());
-    }
-
-    private String getWinner() {
-        if(settings.getPlayers().get(0).getScore()>settings.getPlayers().get(1).getScore()){
-            return settings.getPlayers().get(0).getName();
-        } else {
-            return settings.getPlayers().get(1).getName();
+        String winner = gameInformation.getWinner();
+        if(winner.equals("DRAW")){
+            System.out.println(messageProvider.provideMessage("draw"));
+        }else {
+            System.out.println(messageProvider.provideMessage("winner")+" "+winner+"!");
         }
     }
 
     private void playSmallMatch() {
         boolean haveSmallMatchWinner = false;
+        boardOperationsAPI.printBoard();
         while (!haveSmallMatchWinner) {
-            boardPrinter.printBoard();
-            System.out.println(messageProvider.provideMessage("provideMove")+" "+ currentPlayer.getName());
+            System.out.println(messageProvider.provideMessage("provideMove") + " " + gameInformation.getPlayerName());
             MoveCoordinates validMove = validateMoveProviderAPI.getValidMove();
-            boardUpdater.updateBoard(validMove);
-            if (winnerChecker.checkIfAnyoneWon(validMove)) {
-                currentPlayer.addScore(3);
-                System.out.println(currentPlayer.getName() + " Won! score is "+settings.getPlayers().get(0).getScore()+" vs "+settings.getPlayers().get(1).getScore());
-                rounds++;
+            if(validMove==null){
+                System.out.println(messageProvider.provideMessage("goodbye"));
+                System.exit(0);
+            }
+            boolean winner = boardOperationsAPI.makeMove(validMove);
+            if (winner) {
+                gameInformation.addScore(3);
+                System.out.println(gameInformation.getPlayerName() + " Won! score is " + settings.getPlayers().get(0).getScore() + " vs " + settings.getPlayers().get(1).getScore());
+                gameInformation.nextRound();
+                gameInformation.moveToZero();
 
                 haveSmallMatchWinner = true;
-                if (currentPlayer.getScore() == 6) {
-                    haveWinner = true;
+                if (gameInformation.getScore() == 6) {
+                    gameInformation.setWinner(true);
                 }
             }
-            moves++;
-            if (moves == board.getFieldsNumber()) {
-                draw();
+            gameInformation.increaseMove();
+            if (gameInformation.getMovesNumber() == boardOperationsAPI.boardSize()) {
+                gameInformation.draw();
+                haveSmallMatchWinner=true;
             }
-            settings.changePlayers();
-            changeCurrentPlayer(settings);
+            gameInformation.changePlayer();
         }
-        board.clear();
+        boardOperationsAPI.clear();
     }
-
-    private void changeCurrentPlayer(Settings settings) {
-        currentPlayer = settings.getPlayers().get(0);
-    }
-
-    private void draw() {
-       settings.getPlayers().get(0).addScore(1);
-        settings.getPlayers().get(1).addScore(1);
-        rounds++;
-        System.out.println("Draw");
+    GameInformation getGameInformation() {
+        return gameInformation;
     }
 }
+

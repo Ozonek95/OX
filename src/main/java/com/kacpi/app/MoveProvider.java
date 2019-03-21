@@ -24,8 +24,4 @@ class MoveProvider {
             currentFigure = Figure.CROSS;
         } else currentFigure = Figure.CIRCLE;
     }
-
-    void setFigureToCircleAtRoundBeggining(){
-        currentFigure = Figure.CROSS;
-    }
 }

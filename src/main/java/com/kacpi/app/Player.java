@@ -28,4 +28,8 @@ class Player {
     void addScore(int score) {
         this.score+=score;
     }
+
+    void setName(String name) {
+        this.name=name;
+    }
 }

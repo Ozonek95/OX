@@ -33,4 +33,8 @@ class BoardOperationsAPI {
     void clear() {
         board.clear();
     }
+
+    void printBoard(){
+        boardPrinter.printBoard();
+    }
 }

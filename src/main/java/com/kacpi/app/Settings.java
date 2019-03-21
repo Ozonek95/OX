@@ -7,9 +7,21 @@ import java.util.List;
  * @author Kacper Staszek
  */
 class Settings {
-    private final int rows;
-    private final int columns;
-    private final int patternToWinLength;
+    void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    void setColumns(int columns) {
+        this.columns = columns;
+    }
+
+    void setPatternToWinLength(int patternToWinLength) {
+        this.patternToWinLength = patternToWinLength;
+    }
+
+    private int rows;
+    private int columns;
+    private int patternToWinLength;
     private List<Player> players = Arrays.asList(new Player("Player1",Figure.CIRCLE),new Player("Player2",Figure.CROSS));
 
     Settings(int rows, int columns, int patternToWinLength) throws IllegalGameSettings {
