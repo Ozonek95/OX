@@ -17,4 +17,9 @@ class Field {
     void setState(Figure figure) {
         this.state=figure;
     }
+
+    @Override
+    public String toString() {
+        return state.toString();
+    }
 }
