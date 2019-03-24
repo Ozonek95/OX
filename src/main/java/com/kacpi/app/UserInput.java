@@ -5,10 +5,10 @@ import java.util.Scanner;
 /**
  * @author Kacper Staszek
  */
-public class InputKeyboardProvider implements InputProvider {
+public class UserInput implements InputProvider {
     private Scanner scanner;
 
-    InputKeyboardProvider(Scanner scanner) {
+    UserInput(Scanner scanner) {
         this.scanner = scanner;
     }
 

@@ -10,7 +10,6 @@ class BoardOperationsAPI {
     private BoardPrinter boardPrinter;
     private BoardUpdater boardUpdater;
     private WinnerChecker winnerChecker;
-
     /**
      * @param settings is required, to create board with correct parameters. Then it is injected to other objects.
      */
@@ -20,7 +19,6 @@ class BoardOperationsAPI {
         this.boardUpdater = new BoardUpdater(board);
         this.winnerChecker = new WinnerChecker(board);
     }
-
     /**
      * @param moveCoordinates based on coordinates change board state, also print board to players after move.
      * @return depend on that if given move was winning move, or not.
@@ -34,14 +32,12 @@ class BoardOperationsAPI {
     Board getBoard(){
         return board;
     }
-
     /**
      * @return Board fields number, which is need to check if draw happened.
      */
     int boardSize(){
         return board.getFieldsNumber();
     }
-
     /**
      * Makes all board fields Figure.EMPTY
      */

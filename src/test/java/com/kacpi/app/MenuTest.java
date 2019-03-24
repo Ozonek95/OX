@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class MenuTest {
     public void testMenuSettingsChanges(){
         Scanner scanner = new Scanner("5\n5\n5\n");
-        InputProvider inputProvider = new InputKeyboardProvider(scanner);
+        InputProvider inputProvider = new UserInput(scanner);
         Menu menu = new Menu(inputProvider);
         Settings settings = menu.getSettings();
         menu.createSettings();

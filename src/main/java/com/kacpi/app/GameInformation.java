@@ -6,7 +6,7 @@ package com.kacpi.app;
 class GameInformation {
     private Settings settings;
     private Player currentPlayer;
-    private Boolean haveWinner = false;
+    private Boolean someoneWinGame = false;
     private int moves = 0;
     private int rounds = 0;
 
@@ -19,8 +19,8 @@ class GameInformation {
         this.currentPlayer = settings.getPlayers().get(0);
     }
 
-    boolean checkIfHaveWinner() {
-        return haveWinner;
+    boolean checkIfSomeoneWonGame() {
+        return someoneWinGame;
     }
 
     int roundsPlayed() {
@@ -39,8 +39,8 @@ class GameInformation {
         return currentPlayer.getName();
     }
 
-    void addScore(int score) {
-        currentPlayer.addScore(score);
+    void addScore() {
+        currentPlayer.addScore(3);
     }
 
      void increaseMove() {
@@ -51,8 +51,8 @@ class GameInformation {
         return currentPlayer.getScore();
     }
 
-    void setWinner(boolean b) {
-        haveWinner=b;
+    void setWinner() {
+        someoneWinGame =true;
     }
 
     int getMovesNumber() {

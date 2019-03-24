@@ -5,49 +5,36 @@ package com.kacpi.app;
  */
 class WinnerChecker {
     private Board board;
+    private int fieldsToCheck;
 
     WinnerChecker(Board board) {
-
         this.board = board;
+        fieldsToCheck = (board.getPatternToWinLength() * 2) - 1;
     }
-
     /**
      * @param moveCoordinates last move, base on it class checks if move was winning.
      * @return true if move won the round.
      */
     boolean checkIfAnyoneWon(MoveCoordinates moveCoordinates) {
-        if (checkIfAnyoneWonRows(moveCoordinates)) return true;
-        if (checkIfAnyoneWonColumns(moveCoordinates)) return true;
-        if (checkIfAnyoneWonDiagonals(moveCoordinates)) return true;
-        return checkIfAnyoneWonDiagonalsOtherSide(moveCoordinates);
+        int row = moveCoordinates.getRow();
+        int column = moveCoordinates.getColumn();
+        Figure figure = moveCoordinates.getFigure();
+        if (checkIfAnyoneWonRows(row, column, figure)) return true;
+        if (checkIfAnyoneWonColumns(row, column, figure)) return true;
+        if (checkIfAnyoneWonDiagonals(row, column, figure)) return true;
+        return checkIfAnyoneWonDiagonalsOtherSide(row, column, figure);
     }
-
 
     /**
      * All of below methods check if move is winning move based on its coordinate, and game winning conditions. If any returns true, move was winning.
-     *
      */
-    private boolean checkIfAnyoneWonRows(MoveCoordinates moveCoordinates) {
-        int fieldsToCheck = (board.getPatternToWinLength() * 2) - 1;
-
-        int row = moveCoordinates.getRow();
-        int column = moveCoordinates.getColumn();
-        Figure figureToCheck = moveCoordinates.getFigure();
-        Figure currentFigure = null;
+    private boolean checkIfAnyoneWonRows(int row, int column, Figure figure) {
         int startIndex = (row - fieldsToCheck / 2);
         int endIndex = (row + fieldsToCheck / 2);
-        int innerCounter = 0;
-        while (currentFigure == null) {
-            try {
-                currentFigure = board.getField(startIndex + innerCounter, column).getState();
-            } catch (IndexOutOfBoundsException exception) {
-                innerCounter++;
-            }
-        }
         int counter = 0;
         for (int i = startIndex; i <= endIndex; i++) {
             try {
-                if (board.getField(i, column).getState().equals(figureToCheck)) {
+                if (board.getField(i, column).getState().equals(figure)) {
                     counter++;
                     if (counter == board.getPatternToWinLength()) {
                         return true;
@@ -62,26 +49,13 @@ class WinnerChecker {
         return false;
     }
 
-    private boolean checkIfAnyoneWonColumns(MoveCoordinates moveCoordinates) {
-        int fieldsToCheck = (board.getPatternToWinLength() * 2) - 1;
-        int row = moveCoordinates.getRow();
-        int column = moveCoordinates.getColumn();
-        Figure figureToCheck = moveCoordinates.getFigure();
-        Figure currentFigure = null;
+    private boolean checkIfAnyoneWonColumns(int row, int column, Figure figure) {
         int startIndex = (column - fieldsToCheck / 2);
         int endIndex = (column + fieldsToCheck / 2);
-        int innerCounter = 0;
-        while (currentFigure == null) {
-            try {
-                currentFigure = board.getField(row, startIndex + innerCounter).getState();
-            } catch (IndexOutOfBoundsException exception) {
-                innerCounter++;
-            }
-        }
         int counter = 0;
         for (int i = startIndex; i <= endIndex; i++) {
             try {
-                if (board.getField(row, i).getState().equals(figureToCheck)) {
+                if (board.getField(row, i).getState().equals(figure)) {
                     counter++;
                     if (counter == board.getPatternToWinLength()) {
                         return true;
@@ -96,27 +70,13 @@ class WinnerChecker {
         return false;
     }
 
-    private boolean checkIfAnyoneWonDiagonals(MoveCoordinates moveCoordinates) {
-        int fieldsToCheck = (board.getPatternToWinLength() * 2) - 1;
-        int row = moveCoordinates.getRow();
-        int column = moveCoordinates.getColumn();
-        Figure figureToCheck = moveCoordinates.getFigure();
-        Figure currentFigure = null;
+    private boolean checkIfAnyoneWonDiagonals(int row, int column, Figure figure) {
         int startIndexColumn = (column - fieldsToCheck / 2);
         int startIndexRow = (row - fieldsToCheck / 2);
-        int innerCounter = 0;
-        while (currentFigure == null) {
-            try {
-                currentFigure = board.getField(startIndexRow + innerCounter, startIndexColumn + innerCounter).getState();
-            } catch (IndexOutOfBoundsException exception) {
-                innerCounter++;
-            }
-        }
         int counter = 0;
-        int iterations = 0;
-        while (iterations < fieldsToCheck) {
+        for (int i = 0; i < fieldsToCheck; i++) {
             try {
-                if (board.getField(startIndexRow + iterations, startIndexColumn + iterations).getState().equals(figureToCheck)) {
+                if (board.getField(startIndexRow + i, startIndexColumn + i).getState().equals(figure)) {
                     counter++;
                     if (counter == board.getPatternToWinLength()) {
                         return true;
@@ -127,32 +87,17 @@ class WinnerChecker {
             } catch (ArrayIndexOutOfBoundsException exception) {
                 counter = 0;
             }
-            iterations++;
         }
         return false;
     }
-
-    private boolean checkIfAnyoneWonDiagonalsOtherSide(MoveCoordinates moveCoordinates) {
-        int fieldsToCheck = (board.getPatternToWinLength() * 2) - 1;
-        int row = moveCoordinates.getRow();
-        int column = moveCoordinates.getColumn();
-        Figure figureToCheck = moveCoordinates.getFigure();
-        Figure currentFigure = null;
+    
+    private boolean checkIfAnyoneWonDiagonalsOtherSide(int row, int column, Figure figure) {
         int startIndexColumn = (column + fieldsToCheck / 2);
         int startIndexRow = (row - fieldsToCheck / 2);
-        int innerCounter = 0;
-        while (currentFigure == null) {
-            try {
-                currentFigure = board.getField(startIndexRow + innerCounter, startIndexColumn - innerCounter).getState();
-            } catch (IndexOutOfBoundsException exception) {
-                innerCounter++;
-            }
-        }
         int counter = 0;
-        int iterations = 0;
-        while (iterations < fieldsToCheck) {
+        for (int i = 0; i < fieldsToCheck; i++) {
             try {
-                if (board.getField(startIndexRow + iterations, startIndexColumn - iterations).getState().equals(figureToCheck)) {
+                if (board.getField(startIndexRow + i, startIndexColumn - i).getState().equals(figure)) {
                     counter++;
                     if (counter == board.getPatternToWinLength()) {
                         return true;
@@ -163,7 +108,6 @@ class WinnerChecker {
             } catch (ArrayIndexOutOfBoundsException exception) {
                 counter = 0;
             }
-            iterations++;
         }
         return false;
     }

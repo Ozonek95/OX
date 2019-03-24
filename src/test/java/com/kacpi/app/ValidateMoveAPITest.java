@@ -1,9 +1,10 @@
 package com.kacpi.app;
 
-import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.Scanner;
 
 /**
  * @author Kacper Staszek
@@ -28,13 +29,12 @@ public class ValidateMoveAPITest {
 
     @Test(dataProvider = "data")
     public void testMoveValidation(int rows,int columns,int patternToWin,String input,int expectedRowCoordinate,int expectedColumnCoordinate) throws IllegalGameSettings {
-        InputKeyboardProvider inputProvider = Mockito.mock(InputKeyboardProvider.class);
-        Mockito.when(inputProvider.getInput()).thenReturn(input);
+        InputProvider inputProvider = new UserInput(new Scanner(input+"\n"));
         Board board = new Board(new Settings(rows,columns,patternToWin));
         MoveValidator moveValidator = new MoveValidator(board);
-        ValidateMoveProviderAPI validateMoveProviderAPI = new ValidateMoveProviderAPI(inputProvider,moveValidator);
-        validateMoveProviderAPI.setMessageProviderBasedOnLanguage(new MessageProviderBasedOnLanguage());
-        MoveCoordinates validMove = validateMoveProviderAPI.getValidMove();
+        ValidateMoveAPI validateMoveAPI = new ValidateMoveAPI(inputProvider,moveValidator);
+        validateMoveAPI.setMessagePrinter(new MessagePrinter());
+        MoveCoordinates validMove = validateMoveAPI.getValidMove();
         int row = validMove.getRow();
         int column = validMove.getColumn();
 

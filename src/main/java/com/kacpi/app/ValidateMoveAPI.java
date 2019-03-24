@@ -3,11 +3,11 @@ package com.kacpi.app;
 /**
  * @author Kacper Staszek
  */
-class ValidateMoveProviderAPI {
+class ValidateMoveAPI {
     private InputProvider inputProvider;
     private MoveProvider moveProvider;
     private MoveValidator moveValidator;
-    private MessageProviderBasedOnLanguage messageProviderBasedOnLanguage;
+    private MessagePrinter messagePrinter;
 
     /**
      * @param inputProvider provide possibility to interact with user. He can provide his moves thanks to that.
@@ -15,7 +15,7 @@ class ValidateMoveProviderAPI {
      *
      * Combines classes that are responsible for moves on game board..
      */
-    ValidateMoveProviderAPI(InputProvider inputProvider, MoveValidator moveValidator) {
+    ValidateMoveAPI(InputProvider inputProvider, MoveValidator moveValidator) {
         this.inputProvider = inputProvider;
         this.moveProvider = new MoveProvider();
         this.moveValidator = moveValidator;
@@ -29,7 +29,7 @@ class ValidateMoveProviderAPI {
         MoveCoordinates moveCoordinates = null;
         while (!validMove) {
             String move = inputProvider.getInput();
-            if (move.equals(messageProviderBasedOnLanguage.provideMessage("quit"))) {
+            if (move.equals(messagePrinter.provideMessage("quit"))) {
                 return null;
             } else {
                 try {
@@ -38,14 +38,14 @@ class ValidateMoveProviderAPI {
                     validMove = true;
                     moveProvider.changeFigure();
                 } catch (InvalidMoveException | IllegalArgumentException e) {
-                    System.err.println(messageProviderBasedOnLanguage.provideMessage("badMove"));
+                    System.err.println(messagePrinter.provideMessage("badMove"));
                 }
             }
         }
         return moveCoordinates;
     }
 
-    void setMessageProviderBasedOnLanguage(MessageProviderBasedOnLanguage messageProviderBasedOnLanguage) {
-        this.messageProviderBasedOnLanguage = messageProviderBasedOnLanguage;
+    void setMessagePrinter(MessagePrinter messagePrinter) {
+        this.messagePrinter = messagePrinter;
     }
 }

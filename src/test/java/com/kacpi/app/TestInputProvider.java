@@ -1,8 +1,8 @@
 package com.kacpi.app;
-
-import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Scanner;
 
 /**
  * @author Kacper Staszek
@@ -11,9 +11,7 @@ import org.testng.annotations.Test;
 public class TestInputProvider {
     @Test
     public void testInputProvider(){
-        InputKeyboardProvider inputProvider = Mockito.mock(InputKeyboardProvider.class);
-        Mockito.when(inputProvider.getInput()).thenReturn("1,1");
-
+        UserInput inputProvider = new UserInput(new Scanner("1,1\n"));
         String move = inputProvider.getInput();
         Assert.assertEquals(move,"1,1");
     }

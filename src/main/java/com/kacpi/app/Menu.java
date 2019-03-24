@@ -5,7 +5,7 @@ package com.kacpi.app;
  */
 class Menu {
     private InputProvider inputProvider;
-    private MessageProviderBasedOnLanguage messageProvider = new MessageProviderBasedOnLanguage();
+    private MessagePrinter messageProvider = new MessagePrinter();
     private Settings settings;
     {
         try {
@@ -36,8 +36,12 @@ class Menu {
             System.out.println(messageProvider.provideMessage("changePlayerNames"));
             int choice = Integer.parseInt(inputProvider.getInput());
             switch (choice){
-                case 1: settings=createSettings(); break;
-                case 2: playGame(); gameStarted = true; break;
+                case 1: settings=createSettings();
+                break;
+                case 2:
+                    playGame();
+                    gameStarted = true;
+                    break;
                 case 3:
                     chooseLanguage();
                     break;
@@ -80,34 +84,6 @@ class Menu {
     }
 
     /**
-     * Can change game language.
-     */
-    private void chooseLanguage() {
-        boolean languageProvided = false;
-        while (!languageProvided){
-            System.out.println("Choose language / Wybierz język");
-            System.out.println("1. English");
-            System.out.println("2. Polish");
-            try {
-                int input = Integer.parseInt(inputProvider.getInput());
-                switch (input){
-                    case 1:
-                        messageProvider.changeLanguage(Language.EN);
-                        languageProvided = true;
-                        break;
-                    case 2:
-                        messageProvider.changeLanguage(Language.PL);
-                        languageProvided = true;
-                        break;
-                    default: throw new IllegalArgumentException();
-                }
-            } catch (IllegalArgumentException e){
-                System.err.println("Provide valid option / Wybierz poprawną opcję.");
-            }
-        }
-    }
-
-    /**
      * @return settings, that were changed by user.
      */
     Settings createSettings() {
@@ -139,7 +115,35 @@ class Menu {
         }
     }
 
-    void setMessageProvider(MessageProviderBasedOnLanguage messageProvider) {
+    /**
+     * Can change game language.
+     */
+    private void chooseLanguage() {
+        boolean languageProvided = false;
+        while (!languageProvided){
+            System.out.println("Choose language / Wybierz język");
+            System.out.println("1. English");
+            System.out.println("2. Polish");
+            try {
+                int input = Integer.parseInt(inputProvider.getInput());
+                switch (input){
+                    case 1:
+                        messageProvider.changeLanguage(Language.EN);
+                        languageProvided = true;
+                        break;
+                    case 2:
+                        messageProvider.changeLanguage(Language.PL);
+                        languageProvided = true;
+                        break;
+                    default: throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException e){
+                System.err.println("Provide valid option / Wybierz poprawną opcję.");
+            }
+        }
+    }
+
+    void setMessageProvider(MessagePrinter messageProvider) {
         this.messageProvider = messageProvider;
     }
 

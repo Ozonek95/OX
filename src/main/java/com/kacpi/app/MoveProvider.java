@@ -8,8 +8,8 @@ class MoveProvider {
     private Figure currentFigure = Figure.CROSS;
 
     MoveCoordinates provideCoordinates(String move) {
-        int row = 0;
-        int column = 0;
+        int row;
+        int column;
         String[] inputs = move.split(",");
         if(inputs.length<=1){
             throw new IllegalArgumentException("Incorrect coordinates");

@@ -1,8 +1,9 @@
 package com.kacpi.app;
 
-import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Scanner;
 
 /**
  * @author Kacper Staszek
@@ -10,10 +11,9 @@ import org.testng.annotations.Test;
 public class TestMenu {
     @Test
     public void testMenuGeneratesSettingsFile() {
-        InputKeyboardProvider inputProvider = Mockito.mock(InputKeyboardProvider.class);
-        Mockito.when(inputProvider.getInput()).thenReturn("3");
+        UserInput inputProvider = new UserInput(new Scanner("3\n3\n3\n"));
         Menu menu = new Menu(inputProvider);
-        menu.setMessageProvider(new MessageProviderBasedOnLanguage());
+        menu.setMessageProvider(new MessagePrinter());
         Settings settings = menu.createSettings();
         Assert.assertEquals(settings.getColumns(), 3);
         Assert.assertEquals(settings.getRows(), 3);

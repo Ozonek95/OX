@@ -19,7 +19,7 @@ public class GameInformationTest {
     public void testGameInformationChangesScore() throws IllegalGameSettings {
         GameInformation gameInformation = new GameInformation(new Settings(3,3,3));
         int score = gameInformation.getScore();
-        gameInformation.addScore(3);
+        gameInformation.addScore();
         int scoreAfterChange = gameInformation.getScore();
         Assert.assertEquals(score+3,scoreAfterChange);
     }

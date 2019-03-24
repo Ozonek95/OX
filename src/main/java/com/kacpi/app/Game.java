@@ -6,23 +6,23 @@ package com.kacpi.app;
 class Game {
     private BoardOperationsAPI boardOperationsAPI;
     private Settings settings;
-    private ValidateMoveProviderAPI validateMoveProviderAPI;
-    private MessageProviderBasedOnLanguage messageProvider;
+    private ValidateMoveAPI validateMoveAPI;
+    private MessagePrinter messageProvider;
     private GameInformation gameInformation;
 
     /**
      * @param settings are used to game logic and creation.
-     * @param messageProviderBasedOnLanguage provides proper messages in chosen language.
+     * @param messagePrinter provides proper messages in chosen language.
      * @param inputProvider provide possibility to interact with users, also helpful in tests, if we create our own scanner inputs.
      * @param gameInformation holds state of the game such as number of rounds, moves, and players.
      */
-    Game(Settings settings, MessageProviderBasedOnLanguage messageProviderBasedOnLanguage, InputProvider inputProvider, GameInformation gameInformation) {
+    Game(Settings settings, MessagePrinter messagePrinter, InputProvider inputProvider, GameInformation gameInformation) {
         this.settings = settings;
         this.boardOperationsAPI = new BoardOperationsAPI(settings);
-        this.messageProvider = new MessageProviderBasedOnLanguage();
-        this.validateMoveProviderAPI = new ValidateMoveProviderAPI(inputProvider, new MoveValidator(boardOperationsAPI.getBoard()));
-        messageProvider = messageProviderBasedOnLanguage;
-        validateMoveProviderAPI.setMessageProviderBasedOnLanguage(messageProvider);
+        this.messageProvider = new MessagePrinter();
+        this.validateMoveAPI = new ValidateMoveAPI(inputProvider, new MoveValidator(boardOperationsAPI.getBoard()));
+        messageProvider = messagePrinter;
+        validateMoveAPI.setMessagePrinter(messageProvider);
         this.gameInformation=gameInformation;
     }
 
@@ -30,7 +30,7 @@ class Game {
      * main loop of program. Keep working till someone score 6 points, 3 rounds were played, or somebody quit game.
      */
     void playMatch() {
-        while (!gameInformation.checkIfHaveWinner() && gameInformation.roundsPlayed() < 3) {
+        while (!gameInformation.checkIfSomeoneWonGame() && gameInformation.roundsPlayed() < 3) {
             playSmallMatch();
         }
         String winner = gameInformation.getWinner();
@@ -49,14 +49,14 @@ class Game {
         boardOperationsAPI.printBoard();
         while (!haveSmallMatchWinner) {
             System.out.println(messageProvider.provideMessage("provideMove") + " " + gameInformation.getPlayerName());
-            MoveCoordinates validMove = validateMoveProviderAPI.getValidMove();
+            MoveCoordinates validMove = validateMoveAPI.getValidMove();
             if(validMove==null){
                 System.out.println(messageProvider.provideMessage("goodbye"));
                 System.exit(0);
             }
             boolean winner = boardOperationsAPI.makeMove(validMove);
             if (winner) {
-                gameInformation.addScore(3);
+                gameInformation.addScore();
                 printRoundWinner();
                 showGameScore();
                 gameInformation.nextRound();
@@ -64,7 +64,7 @@ class Game {
 
                 haveSmallMatchWinner = true;
                 if (gameInformation.getScore() == 6) {
-                    gameInformation.setWinner(true);
+                    gameInformation.setWinner();
                 }
             }
             gameInformation.increaseMove();
