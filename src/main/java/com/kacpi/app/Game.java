@@ -31,6 +31,7 @@ class Game {
      */
     void playMatch() {
         while (!gameInformation.checkIfSomeoneWonGame() && gameInformation.roundsPlayed() < 3) {
+            gameInformation.setMovesToZeroAfterSmallMatch();
             playSmallMatch();
         }
         String winner = gameInformation.getWinner();
@@ -60,7 +61,7 @@ class Game {
                 printRoundWinner();
                 showGameScore();
                 gameInformation.nextRound();
-                gameInformation.moveToZero();
+                gameInformation.setMovesToZeroAfterSmallMatch();
 
                 haveSmallMatchWinner = true;
                 if (gameInformation.getScore() == 6) {

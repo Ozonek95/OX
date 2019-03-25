@@ -110,7 +110,7 @@ class Menu {
     }
 
     private void checkGameCoordinatesAreValid(int rows, int columns, int patternToWin) throws IllegalGameSettings {
-        if (rows < 1 || columns < 1 || patternToWin < 1) {
+        if (rows < 3 || columns < 3 || patternToWin < 3 || patternToWin > columns || patternToWin > rows) {
             throw new IllegalGameSettings("Parameters must be positive numbers");
         }
     }

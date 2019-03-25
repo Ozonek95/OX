@@ -77,7 +77,7 @@ class GameInformation {
         rounds++;
     }
 
-    void moveToZero() {
+    void setMovesToZeroAfterSmallMatch() {
         moves=0;
     }
 }
