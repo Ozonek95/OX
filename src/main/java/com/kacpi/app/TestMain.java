@@ -6,6 +6,8 @@ package com.kacpi.app;
 class TestMain {
     public static void main(String[] args) {
         WinningConditionsGenerator generator = new WinningConditionsGenerator();
-        generator.automaticGameDrawGenerator(6,5,3);
+        generator.fillMaps(5,6);
+        generator.winningConditionDiagonalSmallTraingleLeftTopRightBottom(6,5,3);
+
     }
 }
