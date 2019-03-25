@@ -30,10 +30,10 @@ class Menu {
         chooseLanguage();
         boolean gameStarted = false;
         while (!gameStarted){
-            System.out.println(messageProvider.provideMessage("createSettings"));
-            System.out.println(messageProvider.provideMessage("startGame"));
-            System.out.println(messageProvider.provideMessage("changeLanguage"));
-            System.out.println(messageProvider.provideMessage("changePlayerNames"));
+            messageProvider.provideMessage("createSettings");
+            messageProvider.provideMessage("startGame");
+            messageProvider.provideMessage("changeLanguage");
+            messageProvider.provideMessage("changePlayerNames");
             int choice = Integer.parseInt(inputProvider.getInput());
             switch (choice){
                 case 1: settings=createSettings();
@@ -54,9 +54,9 @@ class Menu {
     }
 
     private void changePlayersNames() {
-        System.out.println(messageProvider.provideMessage("name1"));
+        messageProvider.provideMessage("name1");
         settings.getPlayers().get(0).setName(inputProvider.getInput());
-        System.out.println(messageProvider.provideMessage("name2"));
+        messageProvider.provideMessage("name2");
         settings.getPlayers().get(1).setName(inputProvider.getInput());
     }
 
@@ -66,7 +66,7 @@ class Menu {
     private void playGame() {
         boolean playerChosen = false;
         while (!playerChosen) {
-            System.out.println(messageProvider.provideMessage("whoStarts"));
+            messageProvider.provideMessage("whoStarts");
             System.out.println("1:" + settings.getPlayers().get(0).getName());
             System.out.println("2:" + settings.getPlayers().get(1).getName());
             try {
@@ -90,11 +90,11 @@ class Menu {
         boolean correctSettings = false;
         while (!correctSettings){
             try {
-                System.out.println(messageProvider.provideMessage("numberOfRows"));
+                messageProvider.provideMessage("numberOfRows");
                 int rows = Integer.parseInt(inputProvider.getInput());
-                System.out.println(messageProvider.provideMessage("numberOfColumns"));
+                messageProvider.provideMessage("numberOfColumns");
                 int columns = Integer.parseInt(inputProvider.getInput());
-                System.out.println(messageProvider.provideMessage("patternToWinLength"));
+                messageProvider.provideMessage("patternToWinLength");
                 int patternToWin = Integer.parseInt(inputProvider.getInput());
                 checkGameCoordinatesAreValid(rows, columns, patternToWin);
                 settings.setRows(rows);

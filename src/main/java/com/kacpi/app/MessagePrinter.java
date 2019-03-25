@@ -11,6 +11,7 @@ class MessagePrinter {
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("OX", new Locale("pl", "PL"));
 
     String provideMessage(String key) {
+        System.out.println(resourceBundle.getString(key));
         return resourceBundle.getString(key);
     }
 

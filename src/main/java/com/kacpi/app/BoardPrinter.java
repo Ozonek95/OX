@@ -39,8 +39,8 @@ class BoardPrinter {
                     System.out.print("   " + i + " ");
                 }
                 if (j > -1) {
-                  toPaste.append(board.getField(i,j));
-                  if (j == board.getColumns() - 1) {
+                    toPaste.append(board.getField(i,j));
+                    if (j == board.getColumns() - 1) {
                         toPaste.append("|");
                     }
                 }
