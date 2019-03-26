@@ -211,12 +211,12 @@ class WinningConditionsGenerator {
         }
         return movesToWin;
     }
-
-//        builder.append(1).append(System.lineSeparator());
+//            builder.append(1).append(System.lineSeparator());
 //        builder.append(1).append(System.lineSeparator());
 //        builder.append(rows).append(System.lineSeparator());
 //        builder.append(columns).append(System.lineSeparator());
 //        builder.append(patternLength).append(System.lineSeparator());
 //        toReturn.add(builder.toString());
+
 }
 
