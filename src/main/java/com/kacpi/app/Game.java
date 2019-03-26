@@ -7,22 +7,22 @@ class Game {
     private BoardOperationsAPI boardOperationsAPI;
     private Settings settings;
     private ValidateMoveAPI validateMoveAPI;
-    private MessagePrinter messageProvider;
+    private MessageSupplier messageProvider;
     private GameInformation gameInformation;
 
     /**
      * @param settings are used to game logic and creation.
-     * @param messagePrinter provides proper messages in chosen language.
+     * @param messageSupplier provides proper messages in chosen language.
      * @param inputProvider provide possibility to interact with users, also helpful in tests, if we create our own scanner inputs.
      * @param gameInformation holds state of the game such as number of rounds, moves, and players.
      */
-    Game(Settings settings, MessagePrinter messagePrinter, InputProvider inputProvider, GameInformation gameInformation) {
+    Game(Settings settings, MessageSupplier messageSupplier, InputProvider inputProvider, GameInformation gameInformation) {
         this.settings = settings;
         this.boardOperationsAPI = new BoardOperationsAPI(settings);
-        this.messageProvider = new MessagePrinter();
+        this.messageProvider = new MessageSupplier();
         this.validateMoveAPI = new ValidateMoveAPI(inputProvider, new MoveValidator(boardOperationsAPI.getBoard()));
-        messageProvider = messagePrinter;
-        validateMoveAPI.setMessagePrinter(messageProvider);
+        messageProvider = messageSupplier;
+        validateMoveAPI.setMessageSupplier(messageProvider);
         this.gameInformation=gameInformation;
     }
 
@@ -49,10 +49,11 @@ class Game {
         boolean haveSmallMatchWinner = false;
         boardOperationsAPI.printBoard();
         while (!haveSmallMatchWinner) {
-            System.out.println(messageProvider.provideMessage("provideMove") + " " + gameInformation.getPlayerName());
+            System.out.println(messageProvider.provideMessage("provideMove"));
+            System.out.println(gameInformation.getPlayerName());
             MoveCoordinates validMove = validateMoveAPI.getValidMove();
             if(validMove==null){
-                System.out.println(messageProvider.provideMessage("goodbye"));
+                messageProvider.provideMessage("goodbye");
                 System.exit(0);
             }
             boolean winner = boardOperationsAPI.makeMove(validMove);
@@ -71,7 +72,7 @@ class Game {
             gameInformation.increaseMove();
             if (gameInformation.getMovesNumber() == boardOperationsAPI.boardSize()) {
                 gameInformation.draw();
-                System.out.println(messageProvider.provideMessage("drawInRound"));
+               messageProvider.provideMessage("drawInRound");
                 showGameScore();
                 haveSmallMatchWinner=true;
             }
@@ -81,14 +82,16 @@ class Game {
     }
 
     private void printRoundWinner(){
-        System.out.println(messageProvider.provideMessage("roundWinner")+" "+gameInformation.getPlayerName());
+        System.out.println(messageProvider.provideMessage("roundWinner"));
+        System.out.println(gameInformation.getPlayerName());
     }
     /**
      * Provides information about current score result.
      */
 
     private void showGameScore() {
-        System.out.println(messageProvider.provideMessage("score") + settings.getPlayers().get(0).getScore()
+        System.out.println(messageProvider.provideMessage("score"));
+        System.out.println(settings.getPlayers().get(0).getScore()
                 + " vs " + settings.getPlayers().get(1).getScore());
     }
 

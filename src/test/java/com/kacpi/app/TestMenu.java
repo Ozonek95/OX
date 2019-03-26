@@ -13,7 +13,7 @@ public class TestMenu {
     public void testMenuGeneratesSettingsFile() {
         UserInput inputProvider = new UserInput(new Scanner("3\n3\n3\n"));
         Menu menu = new Menu(inputProvider);
-        menu.setMessageProvider(new MessagePrinter());
+        menu.setMessageProvider(new MessageSupplier());
         Settings settings = menu.createSettings();
         Assert.assertEquals(settings.getColumns(), 3);
         Assert.assertEquals(settings.getRows(), 3);

@@ -33,7 +33,7 @@ public class ValidateMoveAPITest {
         Board board = new Board(new Settings(rows,columns,patternToWin));
         MoveValidator moveValidator = new MoveValidator(board);
         ValidateMoveAPI validateMoveAPI = new ValidateMoveAPI(inputProvider,moveValidator);
-        validateMoveAPI.setMessagePrinter(new MessagePrinter());
+        validateMoveAPI.setMessageSupplier(new MessageSupplier());
         MoveCoordinates validMove = validateMoveAPI.getValidMove();
         int row = validMove.getRow();
         int column = validMove.getColumn();

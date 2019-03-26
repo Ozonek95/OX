@@ -7,7 +7,7 @@ class ValidateMoveAPI {
     private InputProvider inputProvider;
     private MoveProvider moveProvider;
     private MoveValidator moveValidator;
-    private MessagePrinter messagePrinter;
+    private MessageSupplier messageSupplier;
 
     /**
      * @param inputProvider provide possibility to interact with user. He can provide his moves thanks to that.
@@ -29,7 +29,7 @@ class ValidateMoveAPI {
         MoveCoordinates moveCoordinates = null;
         while (!validMove) {
             String move = inputProvider.getInput();
-            if (move.equals(messagePrinter.provideMessage("quit"))) {
+            if (move.equals(messageSupplier.provideMessage("quit"))) {
                 return null;
             } else {
                 try {
@@ -38,14 +38,14 @@ class ValidateMoveAPI {
                     validMove = true;
                     moveProvider.changeFigure();
                 } catch (InvalidMoveException | IllegalArgumentException e) {
-                    System.err.println(messagePrinter.provideMessage("badMove"));
+                    System.err.println(messageSupplier.provideMessage("badMove"));
                 }
             }
         }
         return moveCoordinates;
     }
 
-    void setMessagePrinter(MessagePrinter messagePrinter) {
-        this.messagePrinter = messagePrinter;
+    void setMessageSupplier(MessageSupplier messageSupplier) {
+        this.messageSupplier = messageSupplier;
     }
 }

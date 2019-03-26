@@ -20,7 +20,7 @@ public class GameTest {
         } catch (IllegalGameSettings illegalGameSettings) {
             illegalGameSettings.printStackTrace();
         }
-        Game game = new Game(settings,new MessagePrinter(),inputProvider,new GameInformation(settings));
+        Game game = new Game(settings,new MessageSupplier(),inputProvider,new GameInformation(settings));
         game.playMatch();
         String winner = game.getGameInformation().getWinner();
         Assert.assertEquals(winner,"Player1");
@@ -34,7 +34,7 @@ public class GameTest {
         } catch (IllegalGameSettings illegalGameSettings) {
             illegalGameSettings.printStackTrace();
         }
-        Game game = new Game(settings,new MessagePrinter(),inputProvider,new GameInformation(settings));
+        Game game = new Game(settings,new MessageSupplier(),inputProvider,new GameInformation(settings));
         game.playMatch();
         String winner = game.getGameInformation().getWinner();
         Assert.assertEquals(winner,"DRAW!");
@@ -54,7 +54,7 @@ public class GameTest {
         } catch (IllegalGameSettings illegalGameSettings) {
             illegalGameSettings.printStackTrace();
         }
-        Game game = new Game(settings,new MessagePrinter(),inputProvider,new GameInformation(settings));
+        Game game = new Game(settings,new MessageSupplier(),inputProvider,new GameInformation(settings));
         game.playMatch();
         String winner = game.getGameInformation().getWinner();
         Assert.assertEquals(winner,"Player1");

@@ -23,6 +23,13 @@ class WinningConditionsGenerator {
     List<String> automaticGameDrawGenerator(int rows, int columns, int patternLength) {
         List<String> toReturn = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
+        builder.append(1).append(System.lineSeparator());
+        builder.append(1).append(System.lineSeparator());
+        builder.append(rows).append(System.lineSeparator());
+        builder.append(columns).append(System.lineSeparator());
+        builder.append(patternLength).append(System.lineSeparator());
+        builder.append(2).append(System.lineSeparator());
+        builder.append(2).append(System.lineSeparator());
 
         //NIEPARZYSTE ROWS
         int counter = 0;
@@ -64,6 +71,7 @@ class WinningConditionsGenerator {
                counter++;
             }
         }
+        toReturn.add(builder.toString());
        return toReturn;
     }
 

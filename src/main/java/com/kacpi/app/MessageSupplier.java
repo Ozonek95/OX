@@ -7,11 +7,10 @@ import java.util.ResourceBundle;
  * @author Kacper Staszek
  * provides all language determinated messages.
  */
-class MessagePrinter {
+class MessageSupplier {
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("OX", new Locale("pl", "PL"));
 
     String provideMessage(String key) {
-        System.out.println(resourceBundle.getString(key));
         return resourceBundle.getString(key);
     }
 
