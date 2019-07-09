@@ -4,15 +4,15 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class MoveValidator {
-    private Board board;
+    private final Board board;
 
     MoveValidator(Board board) {
         this.board = board;
     }
 
     boolean validateMove(MoveCoordinates move) throws InvalidMoveException {
-            Integer row = move.getRow();
-            Integer column = move.getColumn();
+            int row = move.getRow();
+            int column = move.getColumn();
             if(row>=board.getRows()||row<0||column>=board.getColumns()||column<0){
                 throw new InvalidMoveException("Your move is out of bounds!");
             }

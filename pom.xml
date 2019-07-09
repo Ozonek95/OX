@@ -9,7 +9,7 @@
     <version>0.1</version>
     <name>OX</name>
     <description>Training project</description>
-    <url></url>
+    <!--<url></url>-->
 
     <properties>
         <!-- https://maven.apache.org/general.html#encoding-warning -->

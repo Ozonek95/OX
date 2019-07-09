@@ -6,10 +6,10 @@ package com.kacpi.app;
  * created to operate easier on Board related operations.
  */
 class BoardOperationsAPI {
-    private Board board;
-    private BoardPrinter boardPrinter;
-    private BoardUpdater boardUpdater;
-    private WinnerChecker winnerChecker;
+    private final Board board;
+    private final BoardPrinter boardPrinter;
+    private final BoardUpdater boardUpdater;
+    private final WinnerChecker winnerChecker;
     /**
      * @param settings is required, to create board with correct parameters. Then it is injected to other objects.
      */

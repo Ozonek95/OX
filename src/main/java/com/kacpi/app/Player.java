@@ -5,16 +5,10 @@ package com.kacpi.app;
  */
 class Player {
     private String name;
-    private Figure figure;
     private int score;
 
-    Player(String name, Figure figure) {
+    Player(String name, Figure circle) {
         this.name = name;
-        this.figure = figure;
-    }
-
-    Figure getFigure() {
-        return figure;
     }
 
     String getName() {

@@ -6,7 +6,7 @@ package com.kacpi.app;
 public enum Figure {
 
     EMPTY("|    "), CIRCLE("|  O "),CROSS("|  X ");
-    private String toString;
+    private final String toString;
     Figure(String representation) {
         this.toString =representation;
     }

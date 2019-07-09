@@ -40,8 +40,4 @@ public class GameInformationTest {
         Assert.assertEquals(score2+1,scoreAfterChange2);
         Assert.assertEquals(i,1);
     }
-    public void testRoundCounterWorks(){
-
-    }
-
 }

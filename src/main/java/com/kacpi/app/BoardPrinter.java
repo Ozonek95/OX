@@ -4,7 +4,7 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class BoardPrinter {
-    private Board board;
+    private final Board board;
 
     BoardPrinter(Board board) {
         this.board = board;

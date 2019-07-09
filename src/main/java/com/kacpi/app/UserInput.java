@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @author Kacper Staszek
  */
 public class UserInput implements InputProvider {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     UserInput(Scanner scanner) {
         this.scanner = scanner;

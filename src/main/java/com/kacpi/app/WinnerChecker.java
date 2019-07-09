@@ -4,8 +4,8 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class WinnerChecker {
-    private Board board;
-    private int fieldsToCheck;
+    private final Board board;
+    private final int fieldsToCheck;
 
     WinnerChecker(Board board) {
         this.board = board;

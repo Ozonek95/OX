@@ -4,9 +4,9 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class ValidateMoveAPI {
-    private InputProvider inputProvider;
-    private MoveProvider moveProvider;
-    private MoveValidator moveValidator;
+    private final InputProvider inputProvider;
+    private final MoveProvider moveProvider;
+    private final MoveValidator moveValidator;
     private MessageSupplier messageSupplier;
 
     /**

@@ -27,16 +27,16 @@ public class TestBoardUpdater {
     }
 
     @Test(dataProvider = "data")
-    public void testIfBoardChangeAfterValidMove(int rows,int columns, int rowCoor, int columnCoor, Figure figure,Figure expected) throws InvalidMoveException {
+    public void testIfBoardChangeAfterValidMove(int rows,int columns, int rowCoordinate, int columnCoordinate, Figure figure,Figure expected) throws InvalidMoveException {
         Board board = new Board(rows,columns);
-        MoveCoordinates moveCoordinates = new MoveCoordinates(rowCoor,columnCoor,figure);
+        MoveCoordinates moveCoordinates = new MoveCoordinates(rowCoordinate,columnCoordinate,figure);
         MoveValidator moveValidator = new MoveValidator(board);
         boolean result = moveValidator.validateMove(moveCoordinates);
         BoardUpdater boardUpdater = new BoardUpdater(board);
         if(result) {
             boardUpdater.updateBoard(moveCoordinates);
         }
-        Field field = board.getField(rowCoor,columnCoor);
+        Field field = board.getField(rowCoordinate,columnCoordinate);
         Assert.assertEquals(field.getState(),expected);
     }
 }

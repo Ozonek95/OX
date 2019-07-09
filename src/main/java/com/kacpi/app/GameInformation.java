@@ -4,7 +4,7 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class GameInformation {
-    private Settings settings;
+    private final Settings settings;
     private Player currentPlayer;
     private Boolean someoneWinGame = false;
     private int moves = 0;

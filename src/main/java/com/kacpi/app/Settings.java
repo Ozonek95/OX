@@ -10,7 +10,7 @@ class Settings {
     private int rows;
     private int columns;
     private int patternToWinLength;
-    private List<Player> players = Arrays.asList(new Player("Player1",Figure.CIRCLE),new Player("Player2",Figure.CROSS));
+    private final List<Player> players = Arrays.asList(new Player("Player1",Figure.CIRCLE),new Player("Player2",Figure.CROSS));
     /**
      * @param rows number of rows that game will have
      * @param columns number of columns that game will have

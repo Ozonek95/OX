@@ -6,8 +6,8 @@ package com.kacpi.app;
 class Board {
     private Field[][] fields;
     private int numberOfFields;
-    private int rows;
-    private int columns;
+    private final int rows;
+    private final int columns;
     private int patternToWinLength;
     Board(int rows, int columns) {
         initializeBoard(rows, columns);

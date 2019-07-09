@@ -3,7 +3,7 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class BoardUpdater {
-    private Board board;
+    private final Board board;
 
     BoardUpdater(Board board) {
         this.board = board;

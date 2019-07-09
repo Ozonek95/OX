@@ -4,11 +4,11 @@ package com.kacpi.app;
  * @author Kacper Staszek
  */
 class Game {
-    private BoardOperationsAPI boardOperationsAPI;
-    private Settings settings;
-    private ValidateMoveAPI validateMoveAPI;
+    private final BoardOperationsAPI boardOperationsAPI;
+    private final Settings settings;
+    private final ValidateMoveAPI validateMoveAPI;
     private MessageSupplier messageProvider;
-    private GameInformation gameInformation;
+    private final GameInformation gameInformation;
 
     /**
      * @param settings are used to game logic and creation.
